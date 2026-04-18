@@ -1,6 +1,6 @@
 FROM builder
 
-LABEL org.opencontainers.image.source="https://github.com/algonix/comfy-base"
+LABEL org.opencontainers.image.source="https://github.com/algonixdev/comfy-base"
 
 ARG XFORMERS_VERSION=0.0.35
 

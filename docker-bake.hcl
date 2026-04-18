@@ -1,5 +1,5 @@
 variable "DOCKER_REGISTRY_URL" {
-    default = "ghcr.io/algonix/comfy-base/"
+    default = "ghcr.io/algonixdev/comfy-base/"
 }
 variable "PYTHON_VERSION" {
     default = "3.12"

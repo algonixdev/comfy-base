@@ -1,7 +1,7 @@
 ARG CPU_RUNTIME_IMAGE
 FROM ${CPU_RUNTIME_IMAGE}
 
-LABEL org.opencontainers.image.source="https://github.com/algonix/comfy-base"
+LABEL org.opencontainers.image.source="https://github.com/algonixdev/comfy-base"
 
 ARG PYTHON_VERSION
 ARG UV_VERSION
@@ -46,4 +46,4 @@ RUN --mount=type=cache,target=/cache/uv,sharing=locked \
     --index-url https://download.pytorch.org/whl/${TORCH_FLAVOR}
 
 # Mark this image as CPU-only for downstream entrypoints
-ENV ALGONIX_FORCE_CPU=1
+ENV ALGONIXDEV_FORCE_CPU=1

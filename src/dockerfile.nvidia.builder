@@ -1,7 +1,7 @@
 ARG CUDA_DEVEL_IMAGE
 FROM ${CUDA_DEVEL_IMAGE}
 
-LABEL org.opencontainers.image.source="https://github.com/algonix/comfy-base"
+LABEL org.opencontainers.image.source="https://github.com/algonixdev/comfy-base"
 
 ARG PYTHON_VERSION
 ARG UV_VERSION

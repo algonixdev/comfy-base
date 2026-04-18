@@ -1,6 +1,6 @@
 FROM builder
 
-LABEL org.opencontainers.image.source="https://github.com/algonix/comfy-base"
+LABEL org.opencontainers.image.source="https://github.com/algonixdev/comfy-base"
 
 ARG MAX_JOBS=2
 ARG NVCC_THREADS=4
