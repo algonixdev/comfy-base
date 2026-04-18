@@ -1,0 +1,23 @@
+FROM builder
+
+LABEL org.opencontainers.image.source="https://github.com/algonix/comfy-base"
+
+ARG FLASH_ATTENTION_VERSION=3.0.0
+
+# Download the prebuilt FlashAttention 3 wheel matching this CUDA stack
+RUN --mount=type=cache,target=/cache/uv,sharing=locked \
+    mkdir -p /artifacts/flashattention/dist && \
+    export CUDA_TAG=$(python -c "import torch; print('cu' + torch.version.cuda.replace('.', ''))") && \
+    export FLASH_ATTENTION_WHEEL=flash_attn_3-${FLASH_ATTENTION_VERSION}-cp39-abi3-manylinux_2_28_x86_64.whl && \
+    python - <<'PY'
+import os
+import pathlib
+import urllib.request
+
+cuda_tag = os.environ["CUDA_TAG"]
+wheel = os.environ["FLASH_ATTENTION_WHEEL"]
+dist = pathlib.Path("/artifacts/flashattention/dist")
+url = f"https://download.pytorch.org/whl/{cuda_tag}/{wheel}"
+print(url)
+urllib.request.urlretrieve(url, dist / wheel)
+PY

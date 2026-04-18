@@ -1,0 +1,22 @@
+FROM builder
+
+LABEL org.opencontainers.image.source="https://github.com/algonix/comfy-base"
+
+ARG XFORMERS_VERSION=0.0.35
+
+RUN --mount=type=cache,target=/cache/uv,sharing=locked \
+    mkdir -p /artifacts/xformers/dist && \
+    export CUDA_TAG=$(python -c "import torch; print('cu' + torch.version.cuda.replace('.', ''))") && \
+    export XFORMERS_WHEEL=xformers-${XFORMERS_VERSION}-py39-none-manylinux_2_28_x86_64.whl && \
+    python - <<'PY'
+import os
+import pathlib
+import urllib.request
+
+cuda_tag = os.environ["CUDA_TAG"]
+wheel = os.environ["XFORMERS_WHEEL"]
+dist = pathlib.Path("/artifacts/xformers/dist")
+url = f"https://download.pytorch.org/whl/{cuda_tag}/{wheel}"
+print(url)
+urllib.request.urlretrieve(url, dist / wheel)
+PY
